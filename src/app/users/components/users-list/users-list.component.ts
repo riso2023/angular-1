@@ -26,19 +26,9 @@ export class UsersListComponent implements OnInit {
   public dialog = inject(MatDialog)
   public dialogRef!: MatDialogRef<CreateEditUserComponent>
   public localStorageService = inject(LocalStorageService)
-  public localUsers!: IUser[]
 
   ngOnInit(): void {
-
-    //this.localUsers = this.localStorageService.getItem('users')
-
-    // if(this.localUsers.length === 0) {
-    //   this.userService.getUsers()
-    //   return
-    // }
-
     this.userService.userSubject$.next(this.localStorageService.getItem('users'))
-
   }
 
   openDialog() {
@@ -54,7 +44,6 @@ export class UsersListComponent implements OnInit {
         this.localStorageService.setItem('users', this.localStorageService.getItem('users').concat(userToAdd))
       }
     })
-
   }
 
   onDelete(user: IUser) {
